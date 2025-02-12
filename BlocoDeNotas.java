@@ -9,7 +9,7 @@ public class BlocoDeNotas {
 
     }
 
-    public Anotacao adicionarAnotacao(String texto, int id){
+    public Anotacao adicionarAnotacao(String texto){
         Anotacao nota = new Anotacao(texto, notas.size()+1);
         notas.add(nota);
         return nota;
@@ -18,8 +18,8 @@ public class BlocoDeNotas {
 
     public Anotacao buscarId(int id) {
 
-        Anotacao[] anotacoes = new Anotacao[0];
-        for (Anotacao anotacao : anotacoes) {
+
+        for (Anotacao anotacao : notas) {
 
             if (anotacao.getId() == id) {
                 return anotacao;
@@ -27,6 +27,11 @@ public class BlocoDeNotas {
         }
 
         throw new NoSuchElementException("Anotação não encontrada com o ID: " + id);
+    }
+
+    public void deletar(int id ){
+        Anotacao aSerDeletada = buscarId(id);
+        aSerDeletada.setDeletar(true);
     }
 
 
