@@ -1,33 +1,48 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
+import java.util.List;
 
 public class BlocoDeNotas {
-
-    private ArrayList<Anotacao> notas = new ArrayList<>();
+    private List<Anotacao> anotacoes;
 
     public BlocoDeNotas() {
-
+        this.anotacoes = new ArrayList<>();
     }
 
-    public Anotacao adicionarAnotacao(String texto, int id){
-        Anotacao nota = new Anotacao(texto, notas.size()+1);
-        notas.add(nota);
-        return nota;
+    public void adicionarAnotacao(String nota) {
+        int id = anotacoes.size();
+        anotacoes.add(new Anotacao(nota, id, LocalDate.now()));
     }
 
-
-    public Anotacao buscarId(int id) {
-
-        Anotacao[] anotacoes = new Anotacao[0];
+    public void editarAnotacao(int id, String novaNota) {
         for (Anotacao anotacao : anotacoes) {
-
             if (anotacao.getId() == id) {
-                return anotacao;
+                anotacao.setNota(novaNota);
+                return;
             }
         }
-
-        throw new NoSuchElementException("Anotação não encontrada com o ID: " + id);
     }
 
+    public List<Anotacao> buscarAnotacoes(String texto) {
+        List<Anotacao> resultados = new ArrayList<>();
+        for (Anotacao anotacao : anotacoes) {
+            if (anotacao.getNota().contains(texto)) {
+                resultados.add(anotacao);
+            }
+        }
+        return resultados;
+    }
 
+    public void deletarAnotacao(int id) {
+        for (Anotacao anotacao : anotacoes) {
+            if (anotacao.getId() == id) {
+                anotacoes.remove(anotacao);
+                return;
+            }
+        }
+    }
+
+    public List<Anotacao> listarAnotacoes() {
+        return new ArrayList<>(anotacoes);
+    }
 }
