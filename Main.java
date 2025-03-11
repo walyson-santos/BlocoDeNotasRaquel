@@ -3,28 +3,33 @@ import java.util.Scanner;
 public class Main {
     public static final BlocoDeNotas notas = new BlocoDeNotas();
     public static final Scanner input = new Scanner(System.in);
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         int option = 0;
-        while (option !=5){
-            menu();
-            option = input.nextInt();
-            switch (option){
-                case 1:
-                    adicionarNota();
-                    break;
-                case 2:
-                    editarAnotacao();
-                    break;
-                case 3:
-                    remover();
-                case 4:
-                    buscarId();
-                    break;
-                case 5:
-                    System.out.println("Saindo...");
-                    break;
+        try {
+            while (option != 5) {
+                menu();
+                option = input.nextInt();
+                switch (option) {
+                    case 1:
+                        adicionarNota();
+                        break;
+                    case 2:
+                        editarAnotacao();
+                        break;
+                    case 3:
+                        remover();
+                    case 4:
+                        buscarId();
+                        break;
+                    case 5:
+                        System.out.println("Saindo...");
+                        break;
+                }
             }
-        };
+        }catch (Exception e)
+        {
+            System.out.println(e);
+        }
     }
 
     public static void menu(){
@@ -34,16 +39,15 @@ public class Main {
         System.out.println("3 - remover por id");
         System.out.println("4 - buscar por id");
         System.out.println("5 - sair");
-        input.nextLine();
     }
 
-    public static void adicionarNota(){
+    public static void adicionarNota() throws Exception {
         System.out.println("Adicione o bloco de notas: ");
         String nota = input.next();
         notas.adicionarAnotacao(nota);
     }
 
-    public static void editarAnotacao(){
+    public static void editarAnotacao() throws Exception{
         System.out.println("Digite o id do bloco de notas: ");
         int id = input.nextInt();
         System.out.println("Digite a nova nota: ");
