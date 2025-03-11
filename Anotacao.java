@@ -1,39 +1,76 @@
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Anotacao {
-
-    private String nota;
+    private String texto;
     private int id;
-    private LocalDate data;
+    private LocalDate data = LocalDate.now();
+    private boolean deletado = false;
 
-    public Anotacao(String nota, int id, LocalDate data) {
-        this.nota = nota;
+    public Anotacao(int id, String texto) throws Exception
+    {
         this.id = id;
-        this.data = LocalDate.now();
+        if(texto == null || texto.trim().isEmpty())
+        {
+            throw new Exception("Anotação vazia");
+        }
+        else {
+            this.texto = texto;
+        }
     }
 
-    public Anotacao(String nota, int id) {
-        this.nota = nota;
-        this.id = id;
+    public String getTexto() {
+        return texto;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getNota() {
-        return nota;
-    }
-
-    public void setNota(String nota) {
-        this.nota = nota;
-    }
-
     public LocalDate getData() {
         return data;
     }
 
-    public void setData(LocalDate data) {
-        this.data = data;
+    public void setTexto(String texto) throws Exception {
+        if(texto == null || texto.trim().isEmpty())
+        {
+            throw new Exception("Anotação vazia");
+        }
+        this.texto = texto;
+    }
+
+    public boolean getDeletado() {
+        return deletado;
+    }
+
+    public void setDeletado() {
+        this.deletado = true;
+    }
+
+    public boolean contemTexto(String texto) {
+        return this.texto.contains(texto);
+    }
+
+    @Override
+    public String toString() {
+        return "Anotacao{" +
+                "texto='" + texto + '\'' +
+                ", id=" + id +
+                ", data=" + data +
+                ", deletado=" + deletado +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Anotacao anotacao = (Anotacao) o;
+        return id == anotacao.id && deletado == anotacao.deletado && Objects.equals(texto, anotacao.texto) && Objects.equals(data, anotacao.data);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(texto, id, data, deletado);
     }
 }
