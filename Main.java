@@ -55,13 +55,13 @@ public class Main {
         notas.editarAnotacao(id, novaNota);
     }
 
-    public static void remover(){
+    public static void remover() throws Exception {
         System.out.println("Escolha o id do texto a ser removido: ");
         int id = input.nextInt();
         notas.deletarAnotacao(id);
     }
 
-    public static void buscarId(){
+    public static void buscarId() throws Exception {
        String texto = input.next();
 
        notas.buscarAnotacoes(texto);
